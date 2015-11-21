@@ -3,7 +3,7 @@
 [![Build Status](https://api.travis-ci.org/emn178/freshdesk-rails.png)](https://travis-ci.org/emn178/freshdesk-rails)
 [![Coverage Status](https://coveralls.io/repos/emn178/freshdesk-rails/badge.svg?branch=master)](https://coveralls.io/r/emn178/freshdesk-rails?branch=master)
 
-A library to integrate with freshdesk help desk.[freshdesk](https://freshdesk.com/)
+A library to integrate with [freshdesk](https://freshdesk.com/) help desk.
 
 ## Installation
 
@@ -62,6 +62,7 @@ include_popup_freshdesk "", {"queryString": "&widgetType=popup&formTitle=Ask+Som
 ```
 If you use turbolinks without enabling locale_cookie, you can assaign locale manually.
 ```Ruby
+# in <body/>
 # using I18n.locale
 include_freshdesk_locale
 ```
