@@ -27,5 +27,4 @@ FreshdeskRails.configure do |config|
     'ja-JP' => 'http://jp.example.freshdesk.com',
     'en' => 'http://example.freshdesk.com'
   }
-  config.locale_cookie = :locale
 end

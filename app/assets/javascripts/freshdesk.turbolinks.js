@@ -1,5 +1,7 @@
 ;(function($, undefined) {
+  var LANGUAGES_KEYS = ['submitThanks', 'formTitle'];
   var FreshdeskRails = {}, widgets = $(), iframe, button, locale, orig_locale;
+  var uri = $('<a/>')
 
   window.FreshdeskRails = FreshdeskRails;
 
@@ -12,13 +14,39 @@
     if(locale == old_locale) {
       return;
     }
+    if(FreshdeskRails.languages && FreshdeskRails.languages.buttonText) {
+      button.text(FreshdeskRails.languages.buttonText);
+    }
     var url = FreshdeskRails.urls[locale];
     var old_url = FreshdeskRails.urls[old_locale];
     if(url == old_url) {
       return;
     }
     var iframe_url = iframe.attr('src');
+    if(iframe_url.indexOf('loading') != -1) {
+      return;
+    }
     iframe_url = iframe_url.replace(old_url, url);
+    if(FreshdeskRails.languages) {
+      uri.attr('href', iframe_url);
+      var parts = uri[0].search.split('&');
+      LANGUAGES_KEYS.forEach(function (key) {
+        var value = FreshdeskRails.languages[key];
+        if(value) {
+          for(var i = 0;i < parts.length;++i) {
+            if(parts[i].indexOf(key + '=') == 0) {
+              parts[i] = key + '=' + encodeURIComponent(value);
+            }
+          }
+        }
+      });
+      uri[0].search = parts.join('&');
+      iframe_url = uri.attr('href');
+      if(FreshdeskRails.languages.buttonText) {
+        console.log(FreshdeskRails.languages.buttonText);
+        button.text(FreshdeskRails.languages.buttonText);
+      }
+    }
     iframe.attr('src', iframe_url);
   }
 
@@ -42,13 +70,12 @@
       });
     }
   });
+
   $(document).on('page:load', function() {
     $('body').append(widgets);
     if(FreshdeskRails.locale) {
       updateLocale(FreshdeskRails.locale);
       delete FreshdeskRails.locale;
-    } else if(FreshdeskRails.locale_cookie) {
-      updateLocale(getCookie(FreshdeskRails.locale_cookie));
     }
   });
 
@@ -56,14 +83,6 @@
     if(FreshdeskRails.locale) {
       orig_locale = locale = FreshdeskRails.locale;
       delete FreshdeskRails.locale;
-    } else if(FreshdeskRails.locale_cookie) {
-      orig_locale = locale = getCookie(FreshdeskRails.locale_cookie);
     }
   });
-
-  function getCookie(name) {
-    var value = "; " + document.cookie;
-    var parts = value.split("; " + name + "=");
-    if (parts.length == 2) return parts.pop().split(";").shift();
-  }
 })(jQuery);

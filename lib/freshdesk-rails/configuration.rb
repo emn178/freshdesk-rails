@@ -1,6 +1,6 @@
 module FreshdeskRails
   class Configuration
-    attr_accessor :urls, :default_locale, :locale_cookie
+    attr_accessor :urls, :default_locale
 
     def initialize(options = {})
       options.each { |key, value| 

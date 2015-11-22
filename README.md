@@ -37,9 +37,6 @@ FreshdeskRails.configure do |config|
     'ja-JP' => 'http://jp.example.freshdesk.com',
     'en' => 'http://example.freshdesk.com'
   }
-
-  # set your name of locale in cookie, this is for turbolinks
-  config.locale_cookie = :locale
 end
 ```
 
@@ -60,15 +57,10 @@ In view, you can use `include_popup_freshdesk` to include javascript plugin.
 # in <head/>
 include_popup_freshdesk {"utf8": "✓", "buttonType": "text", "buttonText": "Help", "buttonColor": "white", "buttonBg": "#09a8be", "alignment": "2", "offset": "350px", "submitThanks": "Thanks for your feedback", "formHeight": "500px", "formTitle": "Ask Something..." }
 ```
-If you use turbolinks without enabling locale_cookie, you can assaign locale manually.
+If you use turbolinks, you can assaign locale.
 ```Ruby
 # in <body/>
-# using I18n.locale
-include_freshdesk_locale
-```
-Or
-```Ruby
-include_freshdesk_locale :en
+= update_freshdesk_locale({"locale": "en", "submitThanks": "Thanks for your feedback", "formTitle": "Ask Something...", "buttonText": "Help"})
 ```
 
 ## License
