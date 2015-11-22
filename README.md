@@ -58,7 +58,7 @@ redirect_to_freshdesk :locale => :en
 In view, you can use `include_popup_freshdesk` to include javascript plugin.
 ```ruby
 # in <head/>
-include_popup_freshdesk "", {"queryString": "&widgetType=popup&formTitle=Ask+Something...&submitThanks=Thanks+for+your+feedback", "utf8": "✓", "widgetType": "popup", "buttonType": "text", "buttonText": "Help", "buttonColor": "white", "buttonBg": "#09a8be", "alignment": "2", "offset": "350px", "submitThanks": "Thanks for your feedback", "formHeight": "500px" }
+include_popup_freshdesk {"utf8": "✓", "buttonType": "text", "buttonText": "Help", "buttonColor": "white", "buttonBg": "#09a8be", "alignment": "2", "offset": "350px", "submitThanks": "Thanks for your feedback", "formHeight": "500px", "formTitle": "Ask Something..." }
 ```
 If you use turbolinks without enabling locale_cookie, you can assaign locale manually.
 ```Ruby
